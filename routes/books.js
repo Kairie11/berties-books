@@ -12,7 +12,7 @@ router.get('/search-result', function (req, res, next) {
 });
 
     router.get('/list', function(req, res, next) {
-        let sqlquery = "SELECT * FROM books"; // query database to get all the books
+        let sqlquery = "SELECT id, name FROM books"; // query database to get all the books
         // execute sql query
         db.query(sqlquery, (err, result) => {
             if (err) {
