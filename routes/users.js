@@ -104,40 +104,5 @@ router.get('/profile', redirectLogin, function(req, res, next) {
     res.send('Welcome to your profile, ' + req.session.username);
 });
 
-    // Select the hashed password for the user from the database
-    const sqlQuery = "SELECT hashedPassword FROM users WHERE username = ?";
-    
-    db.query(sqlQuery, [username], (err, result) => {
-        if (err) {
-            return next(err);
-        }
-        
-        // Check if user exists
-        if (result.length === 0) {
-            res.send('Login failed: Username or password is incorrect');
-            return;
-        }
-        
-        // Get the hashed password from database
-        const hashedPassword = result[0].hashedPassword;
-        
-        // Compare the password supplied with the password in the database
-        bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
-            if (err) {
-                // Handle error
-                return next(err);
-            }
-            else if (result == true) {
-                // Send success message
-                res.send('Login successful! Welcome back, ' + username);
-            }
-            else {
-                // Send failure message
-                res.send('Login failed: Username or password is incorrect');
-            }
-        })
-    });
-
-
 // Export the router object so index.js can access it
 module.exports = router

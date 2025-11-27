@@ -16,7 +16,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
 
 // Set up express-session
-const session = require('express-session');
+
 app.use(session({
     secret: 'dkora-001-1998',
     resave: false,
