@@ -3,6 +3,7 @@ var express = require ('express')
 var ejs = require('ejs')
 const path = require('path')
 var mysql = require('mysql2');
+const session = require('express-session');
 
 // Create the express application object
 const app = express()
@@ -13,6 +14,17 @@ app.set('view engine', 'ejs')
 
 // Set up the body parser 
 app.use(express.urlencoded({ extended: true }))
+
+// Set up express-session
+const session = require('express-session');
+app.use(session({
+    secret: 'dkora-001-1998',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 600000 // Session expires after 10 minutes (600000 ms)
+    }
+}));
 
 // Set up public folder (for css and static js)
 app.use(express.static(path.join(__dirname, 'public')))
