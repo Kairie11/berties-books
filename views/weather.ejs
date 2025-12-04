@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Weather - <%=shopData.shopName%></title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+      
+      h1 {
+        color: #2C3E50;
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+      
+      .form-section {
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      
+      .form-section p {
+        font-size: 1.2em;
+        color: #34495E;
+        margin-bottom: 10px;
+      }
+      
+      input[type="text"] {
+        padding: 12px 20px;
+        font-size: 1em;
+        border: 2px solid #3498DB;
+        border-radius: 25px;
+        width: 70%;
+        max-width: 300px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+      
+      input[type="text"]:focus {
+        border-color: #2980B9;
+      }
+      
+      input[type="submit"] {
+        padding: 12px 30px;
+        font-size: 1em;
+        background-color: #3498DB;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background-color 0.3s;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #2980B9;
+      }
+      
+      .weather-result {
+        margin-top: 30px;
+        padding: 25px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+      
+      .weather-result h2 {
+        margin-top: 0;
+        font-size: 1.8em;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      .weather-info {
+        font-size: 1.1em;
+        line-height: 1.8;
+      }
+      
+      .weather-info strong {
+        color: #FFD700;
+        display: inline-block;
+        width: 140px;
+      }
+      
+      .error-message {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #E74C3C;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 1.1em;
+      }
+      
+      .back-link {
+        text-align: center;
+        margin-top: 30px;
+      }
+      
+      .back-link a {
+        color: #3498DB;
+        text-decoration: none;
+        font-size: 1.1em;
+        transition: color 0.3s;
+      }
+      
+      .back-link a:hover {
+        color: #2980B9;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🌤️ Weather Information</h1>
+    
+    <div class="container">
+      <div class="form-section">
+        <form action="weather" method="GET">
+          <p>Enter a city name:</p>
+          <input id="city" type="text" name="city" placeholder="e.g., London, Paris, Tokyo" required>
+          <br>
+          <input type="submit" value="Get Weather">
+        </form>
+      </div>
+      
+      <% if (locals.weatherMessage) { %>
+        <div class="weather-result">
+          <h2>Current Weather</h2>
+          <div class="weather-info">
+            <%- weatherMessage %>
+          </div>
+        </div>
+      <% } %>
+      
+      <% if (locals.error) { %>
+        <div class="error-message">
+          ⚠️ <%= error %>
+        </div>
+      <% } %>
+      
+      <div class="back-link">
+        <a href="/">← Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>

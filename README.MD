@@ -126,6 +126,88 @@ The application follows these principles:
 - Implement rate limiting on login attempts to prevent brute force attacks
 - Add CSRF token validation for additional security
 
+## How it works:
+
+1. **Without search parameter:**
+```
+   http://localhost:8000/api/books
+```
+   Returns all books in the database
+
+2. **With search parameter:**
+```
+   http://localhost:8000/api/books?search=world
+```
+   Returns only books whose names contain "world" (case-insensitive)
+
+3. **Other examples:**
+```
+   http://localhost:8000/api/books?search=brave
+   http://localhost:8000/api/books?search=animal
+
+```
+
+## How it works:
+
+1. **All books:**
+```
+   http://localhost:8000/api/books
+```
+
+2. **Price range only:**
+```
+   http://localhost:8000/api/books?minprice=5&maxprice=10
+```
+   Returns books priced between £5 and £10
+
+3. **Minimum price only:**
+```
+   http://localhost:8000/api/books?minprice=15
+```
+   Returns books priced £15 or more
+
+4. **Maximum price only:**
+```
+   http://localhost:8000/api/books?maxprice=20
+```
+   Returns books priced £20 or less
+
+5. **Combined search and price range:**
+```
+   http://localhost:8000/api/books?search=world&minprice=10&maxprice=30
+
+```
+
+## How it works:
+
+1. **Sort by name:**
+```
+   http://localhost:8000/api/books?sort=name
+```
+   Returns all books sorted alphabetically by name
+
+2. **Sort by price:**
+```
+   http://localhost:8000/api/books?sort=price
+```
+   Returns all books sorted by price (lowest to highest)
+
+3. **Combined with search:**
+```
+   http://localhost:8000/api/books?search=world&sort=price
+```
+   Returns books containing "world" sorted by price
+
+4. **Combined with price range:**
+```
+   http://localhost:8000/api/books?minprice=10&maxprice=25&sort=name
+```
+   Returns books between £10-£25 sorted by name
+
+5. **All parameters together:**
+```
+   http://localhost:8000/api/books?search=brave&minprice=5&maxprice=30&sort=price
+   
 To install and run:
 
 npm install
